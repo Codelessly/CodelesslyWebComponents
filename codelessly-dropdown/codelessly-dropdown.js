@@ -166,6 +166,7 @@ class MyMenu extends LitElement {
         top: unset;
         transform-origin: bottom right;
         }
+
   `;
 
 constructor() {
@@ -211,20 +212,35 @@ hideDropdown() {
 
 updateOffsetClass() {
   const button = this.shadowRoot.querySelector('a');
-    if (button) {
-      const buttonRect = button.getBoundingClientRect();
-      if (buttonRect.left < 100) {
-        button.classList.add('from-left');
-        button.classList.remove('from-right');
-      } else if (window.innerWidth - buttonRect.right < 100) {
-        button.classList.add('from-right');
-        button.classList.remove('from-left');
-      } else {
-        button.classList.remove('from-left');
-        button.classList.remove('from-right');
-      }
+  if (button) {
+    const buttonRect = button.getBoundingClientRect();
+    if (buttonRect.left < 100) {
+      button.classList.add('from-left');
+      button.classList.remove('from-right');
+      console.log('from-left');
+    } else if (window.innerWidth - buttonRect.right < 100) {
+      button.classList.add('from-right');
+      button.classList.remove('from-left');
+      console.log('from-right');
+    } else {
+      button.classList.remove('from-left');
+      button.classList.remove('from-right');
+    }
+    if (buttonRect.top < 100) {
+      button.classList.add('from-top');
+      button.classList.remove('from-bottom');
+      console.log('from-top');
+    } else if (window.innerHeight - buttonRect.bottom < 100) {
+      button.classList.add('from-bottom');
+      button.classList.remove('from-top');
+      console.log('from-bottom');
+    } else {
+      button.classList.remove('from-top');
+      button.classList.remove('from-bottom');
     }
   }
+}
+
   handleWindowClick(event) {
     if (!this.shadowRoot.contains(event.target)) {
       this.hideDropdown();
